@@ -1,0 +1,27 @@
+.header {
+	position: relative;
+	@include top-bar;
+	@include e('main') {
+		background-color: $blue;
+		padding: 15px 0 15px;
+	}
+	
+	@include e('nav') {
+		text-align: right;
+		@include m('mobile') {
+			@include media-breakpoint-up(md) {
+				display: none;
+			}
+			.menu-click {
+				font-size: 26px;
+				color: $white;
+			}
+		}
+		@include m('desktop') {
+			display: none;
+			@include media-breakpoint-up(md) {
+				display: block;
+			}
+		}
+	}
+}

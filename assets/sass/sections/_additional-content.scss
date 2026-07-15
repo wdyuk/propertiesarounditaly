@@ -1,0 +1,7 @@
+.additional-content {
+	@extend %pad;
+	background-color: $steel_light;
+	@include e('content') {
+		
+	}
+}

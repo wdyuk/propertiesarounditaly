@@ -1,0 +1,16 @@
+.responsive-frame {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	height: 0;
+	margin-bottom: $default_spacing_xs;
+	@include media-breakpoint-up(md) {
+		margin-bottom: $default_spacing_sm;
+	}
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}

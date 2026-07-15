@@ -1,0 +1,130 @@
+@mixin default_solid {
+	background-color: $pink;
+	border-color: $pink;
+	color: $blue;
+	&:hover {
+		background-color: $pink_hover;
+		border-color: $pink_hover;
+	}
+}
+%default_solid { @include default_solid; }
+
+p.button {
+	display: inline-block;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-align: center;
+	a {
+		text-decoration: none;
+		padding: $default_button_padding;
+		display: block;
+		border-width: 2px;
+		border-style: solid;
+		//@include radius(3px);
+		@extend %transition;
+		@extend %default_solid;
+	}
+	&.solid {
+		a {
+			@extend %default_solid;
+		}
+		&.light {
+			a {
+				background-color: $grey_light;
+				border-color: $grey_light;
+				color: $grey_dark;
+				&:hover {
+					background-color: $white;
+					border-color: $white;
+				}
+			}
+		}
+		&.dark {
+			a {
+				background-color: $grey_dark;
+				border-color: $grey_dark;
+				color: $grey_light;
+				&:hover {
+					background-color: $black;
+					border-color: $black;
+				}
+			}
+		}
+		&.pink {
+			a {
+				background-color: $pink;
+				border-color: $pink;
+				color: $blue;
+				&:hover {
+					background-color: $pink_hover;
+					border-color: $pink_hover;
+				}
+			}
+		}
+	}
+	&.ghost {
+		&.thin {
+			a { border-width: 1px; }
+		}
+		a {
+			background-color: transparent;
+			border-color: $grey_dark;
+			color: $grey_dark;
+			&:hover {
+				background-color: $grey_dark;
+				color: $grey_light;
+			}
+		}
+		&.light {
+			a {
+				border-color: $grey_light;
+				color: $grey_light;
+				&:hover {
+					background-color: $grey_light;
+					color: $grey_dark;
+				}
+			}
+		}
+		&.dark {
+			a {
+				border-color: $grey_dark;
+				color: $grey_dark;
+				&:hover {
+					background-color: $grey_dark;
+					color: $grey_light;
+				}
+			}
+		}
+	}
+	&.simple {
+		a {
+			padding: 0;
+			background-color: transparent;
+			border: none;
+			&::after {
+				font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f30b";
+				margin-left: 5px;
+			}
+		}
+		&.blue {
+			a {
+				color: $blue;
+			}
+		}
+		&.pink {
+			a {
+				color: $pink;
+			}
+		}
+		&.light {
+			a {
+				color: $grey_light;
+			}
+		}
+		&.dark {
+			a {
+				color: $grey_dark;
+			}
+		}
+	}
+}

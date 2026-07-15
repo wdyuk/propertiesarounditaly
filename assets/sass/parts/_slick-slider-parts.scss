@@ -1,0 +1,37 @@
+$default_offset: 15px;
+
+.slick-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 100;
+	border: none;
+	outline: none;
+	font-size: 0;
+	background-color: transparent;
+	@extend %pmreset;
+	&::after {
+		font-family: $fontawesome_pro;
+		font-size: 24px;
+		color: $blue;
+		opacity: 0.7;
+		@extend %transition;
+	}
+	&:hover {
+		&::after {
+			color: $pink;
+		}
+	}
+	&.slick-prev {
+		left: $default_offset;
+		&::after {
+			content: "\f137";
+		}
+	}
+	&.slick-next {
+		right: $default_offset;
+		&::after {
+			content: "\f138";
+		}
+	}
+}

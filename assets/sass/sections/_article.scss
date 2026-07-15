@@ -1,0 +1,9 @@
+.article {
+	@extend %pad-bottom;
+	@include e('content') {
+		@extend %pad-top;
+	}
+	@include e('buttons') {
+		padding-top: 50px;
+	}
+}

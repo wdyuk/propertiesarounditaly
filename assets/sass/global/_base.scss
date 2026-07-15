@@ -1,0 +1,68 @@
+body {
+	font: $font_stack;
+	color: $steel;
+	background-color: $white;
+	line-height: 1.5;
+	@include media-breakpoint-up(md) {
+		font-size: 16px;
+	}
+}
+
+h1,h2,h3,h4,h5,h6 { font: $heading_font_stack; margin-bottom: 20px; }
+h1 {
+	font-size: $h1_sm;
+	@include media-breakpoint-up(md) { font-size: $h1_md; }
+	@include media-breakpoint-up(lg) { font-size: $h1_lg; }
+}
+h2 {
+	font-size: $h2_sm;
+	@include media-breakpoint-up(md) { font-size: $h2_md; }
+	@include media-breakpoint-up(lg) { font-size: $h2_lg; }
+}
+h3 {
+	font-size: $h3_sm;
+	@include media-breakpoint-up(md) { font-size: $h3_md; }
+	@include media-breakpoint-up(lg) { font-size: $h3_lg; }
+}
+h4 {
+	font-size: $h4_sm;
+	@include media-breakpoint-up(md) { font-size: $h4_md; }
+	@include media-breakpoint-up(lg) { font-size: $h4_lg; }
+}
+h5 {
+	font-size: $h5_sm;
+	@include media-breakpoint-up(md) { font-size: $h5_md; }
+	@include media-breakpoint-up(lg) { font-size: $h5_lg; }
+}
+h6 {
+	font-size: $h6_sm;
+	@include media-breakpoint-up(md) { font-size: $h6_md; }
+	@include media-breakpoint-up(lg) { font-size: $h6_lg; }
+}
+
+p {
+	color: $steel;
+	a {
+		color: $black;
+		text-decoration: underline;
+		@extend %transition;
+		&:hover {
+			color: $black;
+		}
+	}
+}
+
+ul, ol {
+	li {
+		list-style-position: outside;
+		margin-bottom: 5px;
+	}
+}
+ul li { list-style-type: disc; }
+ol li { list-style-type: decimal; }
+
+.pad { @extend %pad; }
+.pad-bottom	{ @extend %pad-bottom; }
+.pad-top { @extend %pad-top; }
+
+.bg-img { @extend %bg-img; }

@@ -1,0 +1,21 @@
+.contact-us-page {
+	@include e('contact-card') {
+		border-bottom: 1px solid;
+		
+		a {
+			& * {
+				color: $steel;
+				@extend %transition;
+			}
+			
+			display: block;
+			padding: $default_spacing_xs;
+			text-decoration: none;
+			@extend %transition;
+			&:hover {
+				background-color: $blue;
+				& * { color: $white; }
+			}
+		}
+	}
+}

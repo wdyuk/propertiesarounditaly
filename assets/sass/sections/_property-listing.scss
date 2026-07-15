@@ -1,0 +1,87 @@
+.property-listing-page {
+	@include e('back') {
+		a {
+			text-decoration: none;
+			text-transform: uppercase;
+			color: $blue;
+		}
+	}
+	@include e('heading') {
+		color: $blue;
+		padding: 20px 0 0;
+		@include e('nav') {
+			justify-content: flex-start;
+			@include media-breakpoint-up(md) {
+				justify-content: flex-end;
+			}
+		}
+		@include e('nav-link') {
+			border: none;
+			background-color: transparent;
+			padding: $default_button_padding;
+			border: 1px solid $grey_dark;
+			color: $grey_dark;
+			@extend %transition;
+			font-size: 12px;
+			&.active {
+				background-color: $grey_dark;
+				border-color: $grey_dark;
+				color: $white;
+			}
+			
+			@include media-breakpoint-up(md) {
+				font-size: 18px;
+			}
+		}
+	}
+	@include e('details') {
+		@extend %pad;
+		@include e('tab-content') {
+			margin-bottom: $default_spacing_xs;
+		}
+		@include e('sidebar') {
+			& * { color: $white; }
+			background-color: $blue;
+			a {
+	            @extend %transition;
+	            &:hover {
+	                color: $pink;
+	                text-decoration: none;
+	            }
+	        }
+		}
+		
+		@include e('sidebar-item') {
+			padding: 30px;
+			border-bottom: 1px solid $white;
+			p {
+				margin-bottom: 0;
+				a {
+					text-decoration: none;
+					&:hover {
+						color: $pink;
+					}
+				}
+			}
+			img.icon {
+				vertical-align: baseline;
+				margin-right: 10px;
+			}
+		}
+	}
+	@include e('slider') {
+		width: 100%;
+		margin: 0 auto;
+		.slick-arrow {
+			&.slick-next {
+				right: 15px;
+			}
+			&.slick-prev {
+				left: 15px;
+			}
+		}
+	}
+	@include e('article') {
+		@extend %pad-bottom;
+	}
+}

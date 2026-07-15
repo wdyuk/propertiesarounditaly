@@ -1,0 +1,44 @@
+.nav-drawer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 2000;
+	height: 0;
+	width: 100%;
+	&.open {
+		height: auto;
+		.nav-drawer__layer-1 { left: 0; }
+	}
+	@include e('layer-1') {
+		width: 100%;
+		height: calc(100vh);
+		position: absolute;
+		top: 0px;
+		left: 100%;
+		overflow: scroll;
+		background-color: $blue;
+		@extend %transition;
+	}
+	@include e('menu-container') {
+		padding: 40px 15px;
+		position: relative;
+	}
+	@include e('header') {
+		font-size: 0;
+	}
+	@include e('logo-container') {
+		display: inline-block;
+		width: 20%;
+	}
+	@include e('close-menu') {
+        display: inline-block;
+        width: 80%;
+		text-align: right;
+        font-size: 22px;
+    	color: $white;
+	}
+	
+	@include media-breakpoint-up(md) {
+		display: none;
+	}
+}

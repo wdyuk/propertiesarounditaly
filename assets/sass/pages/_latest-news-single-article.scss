@@ -1,0 +1,14 @@
+.latest-news-single-article {
+	@include e('article-container') {
+		@extend %pad;
+	}
+	@include e('article-heading') {
+		@extend %pad-bottom;
+		img {
+			margin-top: $default_spacing_xs;
+		}
+	}
+	@include e('article') {
+		
+	}
+}

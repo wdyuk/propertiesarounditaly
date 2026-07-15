@@ -1,0 +1,19 @@
+.icon {
+	width: auto;
+	@include m('d-block') {
+		display: block !important;
+	}
+	@include m('d-iblock') {
+		display: inline-block !important;
+	}
+	
+	@include m('xs') {
+		max-height: 15px;
+	}
+	@include m('sm') {
+		max-height: 20px;
+	}
+	@include m('md') {
+		max-height: 30px;
+	}
+}

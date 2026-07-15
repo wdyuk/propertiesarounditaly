@@ -1,0 +1,12 @@
+.property-search-page {
+	@include e('main-container') {
+		@extend %pad;
+	}
+	@include e('sidebar') {
+		margin-bottom: 30px;
+		background-color: $blue;
+		h4 {
+			color: $white;
+		}
+	}
+}

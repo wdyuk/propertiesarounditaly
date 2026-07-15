@@ -1,0 +1,17 @@
+.vacancies-page {
+	@include e('article') {
+		@extend %pad;
+	}
+	@include e('vacancies') {
+		@extend %pad-bottom;
+	}
+	@include e('single-vacancy') {
+		@include vacancy-block;
+	}
+	@include e('single-vacancy-content') {
+		margin-bottom: $default_spacing_xs;
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;
+		}
+	}
+}

@@ -1,0 +1,145 @@
+/* Fonts */
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-BlackItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-Black.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-BoldItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-Bold.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-ExtraBoldItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-ExtraBoldItalic.woff') format('woff');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-Light.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-ExtraBold.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-LightItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-MediumItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-Medium.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-Thin.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-Regular.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-RegularItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-RegularItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-UltraLight.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-UltraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-UltraLightItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-UltraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acherus Grotesque';
+    src: url('../fonts/AcherusGrotesque-ThinItalic.woff2') format('woff2'),
+        url('../fonts/AcherusGrotesque-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}

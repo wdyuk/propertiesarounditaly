@@ -1,0 +1,18 @@
+.single-vacancy {
+	
+	main { @extend %pad; }
+	
+	@include e('heading-content') {
+		@include vacancy-block;
+	}
+	
+	@include e('sidebar-item') {
+		margin-bottom: $default_spacing_xs;
+		@include m('alt') {
+			background-color: $blue;
+			padding: $default_spacing_xs;
+			
+			& * { color: $white !important;  }
+		}
+	}
+}

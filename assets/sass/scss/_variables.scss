@@ -1,0 +1,70 @@
+$white:		#FFFFFF;
+$black:		#000000;
+
+$pink:			#f7c1d6;
+$blue:			#271759;
+$steel:			#29363B;
+$steel_light:	#DDE2E6;
+$yellow:		#FDC511;
+	$pink_hover:	darken($pink,10%);
+	$blue_hover:	darken($blue,10%);
+
+$grey_light:	#EEEEEE;
+$grey_med:		#9B9B9B;
+$grey_dark:		#2c2926;
+
+$default_spacing_xs:	30px;
+$default_spacing_sm:	50px;
+$default_spacing_md:	70px;
+$default_spacing_lg:	90px;
+$default_spacing_xl:	160px;
+
+$default_border_radius:	5px;
+
+$default_transition:	all .25s ease;
+
+$default_background_attachment:	scroll;
+$default_background_repeat:		no-repeat;
+$default_background_color:		transparent;
+$default_background_size:		cover;
+$default_background_position:	center center;
+
+$default_button_padding: 12px 18px;
+
+$default_font:	'Montserrat', sans-serif;
+$featured_font:	'Montserrat', sans-serif;
+
+$fontawesome_pro: 'Font Awesome 5 Pro';
+$fontawesome_brands: 'Font Awesome 5 Brands';
+$fontawesome_duo: 'Font Awesome 5 Duotone';
+
+$default_font_style:	normal;
+$default_font_variant:	normal;
+$default_font_weight:	400;
+$default_font_size:		14px;
+$default_font_family:	$default_font;
+$font_stack:
+	$default_font_style
+	$default_font_variant
+	$default_font_weight
+	$default_font_size
+	$default_font_family;
+
+$h1_sm: 38px;	$h1_md: 42px;	$h1_lg: 42px;
+$h2_sm: 32px;	$h2_md: 38px;	$h2_lg: 38px;
+$h3_sm: 28px;	$h3_md: 32px;	$h3_lg: 32px;
+$h4_sm: 24px;	$h4_md: 28px;	$h4_lg: 28px;
+$h5_sm: 20px;	$h5_md: 24px;	$h5_lg: 24px;
+$h6_sm: 16px;	$h6_md: 20px;	$h6_lg: 20px;
+
+$heading_font_style:	normal;
+$heading_font_variant:	normal;
+$heading_font_weight:	400;
+$heading_font_size:		$h1_sm;
+$heading_font_family:	$featured_font;
+$heading_font_stack:
+	$heading_font_style
+	$heading_font_variant
+	$heading_font_weight
+	$heading_font_size
+	$heading_font_family;

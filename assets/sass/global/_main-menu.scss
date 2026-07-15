@@ -1,0 +1,192 @@
+// Nav Drawer Lists and List Items
+@mixin list {
+	@extend %pmreset;
+	position: absolute;
+	width: 100%;
+	padding: $default_spacing_sm 15px;
+	display: block;
+}
+@mixin list_item {
+	padding: 0 0 15px 0;
+	margin: 10px 0;
+	list-style-type: none;
+	font-weight: 700;
+	font-size: 14px;
+	width: 100%;
+	display: block;
+	color: $white;
+	border-bottom: 1px solid white;
+	@extend %transition;
+	&.sub-menu-title {
+		color: $pink;
+		font-weight: 700;
+		margin-top: $default_spacing_xs;
+		font-size: 18px;
+	}
+	a {
+        color: $white;
+        @extend %transition;
+		&:hover {
+			color: $pink;
+			text-decoration: none;
+		}
+		
+		@include media-breakpoint-up(md) {
+			padding: 20px 15px;
+			display: block;
+		}
+    }
+    
+    @include media-breakpoint-up(md) {
+    	border-bottom: none;
+		&:hover {
+			background-color: $pink;
+			a {
+				color: $blue;
+			}
+		}
+    }
+}
+
+.main-menu {
+	@include e('list') {
+		@include list;
+		left: 0;
+		@extend %transition;
+		&.swiped {
+			left: -100%;
+		}
+		@include media-breakpoint-up(md) {
+			margin: 0 0 -15px 0;
+			padding: 0;
+			position: unset;
+			// position: relative;
+		}
+	}
+	@include e('item') {
+		@include list_item;
+		&:first-child {
+			margin-left: 0;
+		}
+		span {
+			color: $white;
+			position: absolute;
+			right: 15px;
+		}
+		&.child-click-back {
+			color: $white;
+		}
+		@include media-breakpoint-up(md) {
+			display: inline-block;
+			width: auto;
+			font-weight: 400;
+			font-size: 22px;
+			text-transform: uppercase;
+			margin: 0;
+			padding: 0;
+			@include m('has-child') {
+				/*&::after {
+					font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f078";
+					color: $white;
+					display: inline-block;
+					margin-left: 3px;
+				}*/
+				&:hover {
+					/*&::after {
+						transform: translateY(3px);
+					}*/
+					.main-menu__child-list-main-container {
+						opacity: 1;
+						height: auto;
+						display: block;
+					}
+				}
+			}
+		}
+	}
+	
+	
+	@include e('child-list-main-container') {
+		@include list;
+		left: 100%;
+		top: 0;
+		@extend %transition;
+		display: none;
+		&.active {
+			display: block;
+		}
+		@include media-breakpoint-up(md) {
+			position: absolute;
+			display: block;
+			opacity: 0;
+			height: 0;
+			background-color: $steel;
+			left: 0;
+			top: 100%;
+			overflow: hidden;
+			padding: 0;
+			z-index: 100;
+			width: 100%;
+			text-align: left;
+			//border-top: 3px solid $pink;
+		}
+	}
+	@include e('child-list-inner-container') {
+		list-style-type: none;
+		@extend %pmreset;
+		@include media-breakpoint-up(md) {
+			padding: $default_spacing_xs;
+			border-top: 3px solid $pink;
+		}
+	}
+	
+	
+	@include e('child-list') {
+		@extend %pmreset;
+		@include media-breakpoint-up(md) {
+			display: inline-block;
+			vertical-align: top;
+			height: 100%;
+			&:first-child {
+				margin-right: $default_spacing_sm;
+				padding-right: $default_spacing_sm;
+				border-right: 1px solid $white;
+			}
+			&:last-child {
+				margin-right: 0 !important;
+				padding-right: 0 !important;
+				border-right: none;
+			}
+		}
+	}
+	@include e('child-item') {
+		list-style-type: none;
+		font-weight: 400;
+		@include media-breakpoint-up(md) {
+			padding: 0 !important;
+			margin: 0 0 20px 0 !important;
+			font-size: 18px;
+			text-transform: none;
+			
+			a {
+				padding: 0;
+				color: $white !important;
+				&:hover {
+					color: $pink !important;
+				}
+			}
+		}
+	}
+	@include e('menu-title') {
+		font-weight: 700;
+		margin-top: $default_spacing_xs;
+		color: $pink;
+		
+		@include media-breakpoint-up(md) {
+			color: $white;
+			text-transform: uppercase;
+			font-size: 28px;
+			font-weight: 400;
+		}
+	}
+}

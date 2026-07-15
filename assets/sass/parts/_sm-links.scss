@@ -1,0 +1,17 @@
+.sm-links {
+	position: absolute;
+	top: 5px;
+	right: 15px;
+	font-size: 20px;
+	@include e('link') {
+		display: inline-block;
+		margin-left: 5px;
+		a {
+			color: $white;
+			@extend %transition;
+			&:hover {
+				color: $pink;
+			}
+		}
+	}
+}

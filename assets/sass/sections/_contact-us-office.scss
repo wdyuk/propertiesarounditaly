@@ -1,0 +1,19 @@
+.office-contact-page {
+	@include e('contact-information') {
+		border-top: 1px solid $steel;
+		border-bottom: 1px solid $steel;
+		padding: $default_spacing_xs;
+		margin-bottom: $default_spacing_md;
+		a {
+			color: $steel;
+			@extend %transition;
+			&:hover {
+				color: $blue;
+				text-decoration: none;
+			}
+		}
+	}
+	@include e('additional-content') {
+		background-color: $white;
+	}
+}

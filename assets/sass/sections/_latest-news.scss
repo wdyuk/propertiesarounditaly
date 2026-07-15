@@ -1,0 +1,45 @@
+.latest-news {
+	@extend %pad-top;
+	
+	@include e('post') {
+		@include m('img') {
+			@extend .bg-img;
+		}
+		@include m('no-img') {
+			
+		}
+	}
+	@include e('post-overlay') {
+		padding: $default_spacing_lg $default_spacing_sm;
+		@include m('img') {
+			background-color: rgba($white,0.55);
+		}
+		@include m('no-img') {
+			background-color: rgba($pink,1);
+		}
+	}
+	@include e('post-content') {
+		
+	}
+	@include e('post-meta') {
+		display: block;
+		margin-bottom: $default_spacing_xs;
+	}
+	@include e('post-meta-date') {
+		
+	}
+	@include e('post-title') {
+		
+	}
+	@include e('post-snippet') {
+		margin-bottom: $default_spacing_xs;
+	}
+	
+	@include pagination;
+	
+	@include e('pagination') {
+		text-align: right;
+		padding: 0;
+	}
+	
+}

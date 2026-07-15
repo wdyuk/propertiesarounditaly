@@ -1,0 +1,171 @@
+.home-page {
+	@include e('hero') {
+		position: relative;
+		@include e('bg-img') {
+			padding-top: calc(70vh);
+			position: relative;
+		}
+		@include e('property-info') {
+			position: absolute;
+			padding: 20px;
+			background-color: rgba($steel,0.8);
+			bottom: 10%;
+			left: 50%;
+			transform: translate(-50%);
+			text-align: center;
+			white-space: nowrap;
+			color: $white;
+		}
+		@include e('property-title') {
+			font-weight: 400;
+			margin-bottom: 0;
+		}
+		@include e('property-price') {
+			margin-bottom: 15px;
+		}
+		@include e('property-details') {
+			margin-bottom: 0;
+		}
+		@include e('property-detail') {
+			font-size: 14px;
+			margin: 0 5px;
+			img {
+				vertical-align: baseline;
+			}
+		}
+		.button {
+			margin-bottom: 0;
+		}
+	}
+	
+	@include e('search') {
+		
+	}
+	@include e('search-bar') {
+		margin-top: -20px;
+	}
+	
+	@include e('featured-properties') {
+		@extend %pad-top;
+	}
+	@include e('featured-property') {
+		position: relative;
+		height: 450px;
+		&:hover {
+			.home-page__featured-property-info {
+				opacity: 1;
+			}
+		}
+		@include content-block;
+	}
+	@include e('featured-property-info') {
+		position: absolute;
+		padding: 20px;
+		background-color: rgba($steel,0.8);
+		bottom: 0;
+		text-align: center;
+		color: $white;
+		width: 100%;
+		opacity: 0;
+		@extend %transition;
+	}
+	@include e('featured-property-title') {
+		font-weight: 400;
+	}
+	@include e('featured-property-price') {
+		
+	}
+	@include e('featured-property-details') {
+		margin-bottom: 10px;
+	}
+	@include e('featured-property-detail') {
+		font-size: 14px;
+		img {
+			vertical-align: baseline;
+		}
+	}
+	
+	@include e('featured-boxes') {
+		@extend %pad-bottom;
+	}
+	@include e('featured-box') {
+		position: relative;
+		@include content-block;
+	}
+	@include e('featured-box-content-container') {
+		-webkit-clip-path: polygon(0% 100%, 55% 100%, 65% 0%, 0% 0%);
+  		clip-path: polygon(0% 100%, 55% 100%, 65% 0%, 0% 0%);
+  		@include media-breakpoint-up(md) {
+  			-webkit-clip-path: polygon(0% 100%, 70% 100%, 80% 0%, 0% 0%);
+  			clip-path: polygon(0% 100%, 70% 100%, 80% 0%, 0% 0%);
+  		}
+  		
+  		height: 350px;
+  		padding: 30px;
+  		@include m('blue') {
+  			background-color: $blue;
+  			& * {
+				color: $white;
+			}
+  		}
+  		@include m('pink') {
+  			background-color: $pink;
+  			& * {
+				color: $blue;
+			}
+  		}
+	}
+	@include e('featured-box-content') {
+		width: 55%;
+		@include media-breakpoint-up(md) {
+			width: 65%;
+		}
+		
+	}
+	@include e('featured-box-image') {
+		position: absolute;
+		width: 70%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		z-index: -1;
+		background-position: left center;
+		@include media-breakpoint-up(md) {
+			width: 50%;
+		}
+	}
+	
+	@include e('usps') {
+		@extend %pad;
+		background-color: $blue;
+		color: $white;
+		@include media-breakpoint-up(md) {
+			padding: $default_spacing_lg;
+		}
+	}
+	@include e('usp-col') {
+		@include media-breakpoint-up(md) {
+			&:last-child {
+				.home-page__usp {
+					border-right: none;
+				}
+			}
+		}
+	}
+	@include e('usp') {
+		padding: $default_spacing_xs;
+		color: $white;
+		text-transform: uppercase;
+		@include media-breakpoint-up(md) {
+			border-right: 1px solid $pink;
+			padding: $default_spacing_sm;
+			height: 100%;
+		}
+	}
+	@include e('usp-icon') {
+		max-width: 50%;
+		height: auto;
+		display: block;
+		margin: 0 auto $default_spacing_xs;
+	}
+}

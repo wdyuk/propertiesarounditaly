@@ -1,0 +1,10 @@
+cms_wdy/includes/config.php
+error_log
+media/
+uploads/
+/.htaccess
+
+/php.ini
+/php.ini*
+/.user.ini
+/.user.ini*

@@ -1,0 +1,55 @@
+.property-listings-page {
+	@include e('heading') {
+		padding: 20px 0;
+		
+		@include e('actions') {
+			
+			p.button {
+				margin-bottom: 0;
+				font-weight: 400;
+			}
+		}
+	}
+	
+	@include e('list') {
+		
+	}
+	@include e('property') {
+		//margin-bottom: $default_spacing_sm;
+	}
+	@include e('property-img') {
+		position: relative;
+		height: 380px;
+	}
+	@include e('property-label') {
+		position: absolute;
+		top: 0;
+		right: $default_spacing_sm;
+		background-color: $pink;
+		color: $blue;
+		padding: 15px;
+		text-transform: uppercase;
+	}
+	@include e('property-info') {
+		padding: 20px;
+		background-color: $steel;
+		text-align: center;
+		color: $white;
+	}
+	@include e('property-title') {
+		font-weight: 400;
+	}
+	@include e('property-price') {
+		
+	}
+	@include e('property-details') {
+		margin-bottom: 20px;
+	}
+	@include e('property-detail') {
+		font-size: 14px;
+		img {
+			vertical-align: baseline;
+		}
+	}
+	@include pagination;
+}

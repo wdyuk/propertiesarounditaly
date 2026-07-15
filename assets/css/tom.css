@@ -1,0 +1,193 @@
+.meet-team__member-content{
+	/*padding: 20px !important;*/
+	height: 100%;
+}
+@media (min-width: 768px){
+	.home-page__featured-box-image {
+		width: 70%;
+	}
+}
+.meet-team__member-name {
+	font-size: 28px;
+}
+.property-map {
+	background-color: #271759;
+    color: white;
+    text-align: center;
+}
+.list-group-item li{
+	list-style-type:  none;
+}
+.list-group-item ul{
+	padding-left: 0px;
+}
+.propname {
+	font-family: normal normal 400 14px "Montserrat", sans-serif;
+	font-size: 15px;
+	color: #271759;
+	font-weight: bold;
+}
+p.button.ghost.dark a.active {
+	background-color: #2c2926 !important;
+    color: #EEEEEE !important;
+}
+@media (min-width: 768px) {
+	.max-200{
+		max-width: 200px;
+	}
+}
+@media(max-width: 500px){
+	.home-page__featured-box-content h2{
+		font-size: 25px;
+	}
+}
+@media(min-width: 500px){
+	.footer__contact h2 {
+		min-height: 47px;
+	}
+}
+@media(max-width: 360px){
+	.home-page__featured-box-content h2{
+		font-size: 20px;
+	}
+}
+@media(max-width: 767px){
+	.property-listings-page__heading__actions p.button {
+		width: 100%;
+	}
+	.footer__top-bar__ctas {
+		right: unset;
+	}
+}
+.article__content img{
+	width: 100%;
+}
+.title .latest-news__post-title{
+	min-height: 141px;
+}
+.text .latest-news__post-snippet{
+	min-height: 72px;
+}
+.sm-links-footer{
+	top: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+@media(min-width:768px) and (max-width:992px){
+	.footer__top-bar__ctas {
+		left: unset;
+		transform: unset;
+	}
+	.home-page__featured-box-content h2 {
+		font-size: 28px !important;
+	}
+	.home-page__featured-box-content p {
+		font-size: 14px !important;
+	}
+	.home-page__usp {
+		padding: 10px;
+	}
+}
+@media(min-width:768px) and (max-width:991px){
+	.latest-news__post-overlay{
+		padding: 45px 25px;
+	}
+	h2.latest-news__post-title {
+		font-size: 26px;
+		height: 150px;
+	}
+	p.latest-news__post-snippet{
+		height: 100px;
+	}
+	.meet-team__noslide .meet-team__member {
+		width: 45%;
+	}
+	.meet-team__member-name {
+		font-size: 26px;
+	}
+	.meet-team__member-position {
+		font-size: 18px;
+	}
+	.property-listings-page__property-title-address-area{
+		height: 70px;
+	}
+	.property-listings-page__property-price{
+		font-size: 18px;
+	}
+	.about-us-page__additional-content__membership {
+		border: none;
+		padding: 10px;
+		font-size: 14px;
+	}
+}
+@media(min-width:768px) and (max-width:850px){
+	.home-page__usp {
+		font-size: 14px;
+		border: none;
+	}
+}
+@media(min-width:992px) and (max-width:1199px){
+	.home-page__featured-box-content h2 {
+		font-size: 30px !important;
+	}
+	h2.latest-news__post-title {
+		font-size: 30px;
+	}
+	p.latest-news__post-snippet{
+		height: 70px;
+	}
+	.meet-team__member-name {
+		font-size: 24px;
+	}
+	.meet-team__member-position {
+		font-size: 17px;
+	}
+	.property-listings-page__property-title {
+		font-size: 18px;
+	}
+	.property-listings-page__property-price{
+		font-size: 18px;
+	}
+
+}
+.additional-content__content img{
+	max-width: 100%;
+}
+.form__item--type-map{
+	padding: 0px !important;
+    text-align: center;
+    display: block !important;
+}
+.form__item--type-map img{
+	max-width: 68px;
+}
+@media(max-width: 767px){
+	.form__item--type-map{
+		padding: 10px !important;
+	}
+}
+.pink-button{
+	background-color: #f7c1d6;
+    border-color: #f7c1d6;
+    color: #271759;
+}
+.latest-news__post-snippet {
+	min-height: 50px;
+}
+span.property-listings-page__property-label {
+	padding: 10px;
+	display: inline-block;
+	position: relative;
+	top: -3px;
+	right: 0px;
+	margin-left: 20px;
+}
+.select-container select.ghost {
+	appearance: auto !important;
+	-webkit-appearance: auto !important;
+	-moz-appearance: auto !important
+	padding: 13.5px 18px;
+}
+.select-container:after{
+	display: none;
+}

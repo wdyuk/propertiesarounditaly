@@ -1,0 +1,56 @@
+.testimonials {	
+	@include e('overlay') {
+		padding: $default_spacing_xl 0;
+		background-color: rgba($white,0.5);
+	}
+	@include e('testimonial') {
+		padding: $default_spacing_xs;
+		background-color: $white;
+		@include radius(4px);
+		margin: 20px;
+		opacity: 0.5;
+		@extend %transition;
+		&.slick-center {
+			opacity: 1;
+		}
+		
+		@include e('header') {
+			font-size: 0;
+		}
+		@include e('title') {
+			h6 {
+				color: $grey_med;
+				font-weight: 700;
+				margin-bottom: 0;
+			}
+			
+			@include media-breakpoint-up(md) {
+				display: inline-block;
+				width: 60%;
+			}
+		}
+		@include e('stars') {
+			margin-bottom: 10px;
+			font-size: 16px;
+			i {
+				color: $yellow;
+			}
+			
+			@include media-breakpoint-up(md) {
+				display: inline-block;
+				width: 40%;
+				text-align: right;
+			}
+		}
+		@include e('info') {
+			p {
+				color: $blue;
+			}
+		}
+		@include e('text') {
+			p {
+				color: $blue;
+			}
+		}
+	}
+}
