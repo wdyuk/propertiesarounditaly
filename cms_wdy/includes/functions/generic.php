@@ -335,4 +335,240 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 function generateRandomString($length = 10) {
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }
+
+function get_active_sites()
+{
+    return table_fetch_rows('sites', 'status = 1', 'is_default DESC, website_name ASC');
+}
+
+function get_property_visibility_site_ids($property_id)
+{
+    $rows = table_fetch_rows('property_site_visibility', 'property_id = ' . (int) $property_id . ' AND is_visible = 1', 'site_id ASC');
+    $site_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $site_ids[] = (int) $row['site_id'];
+        }
+    }
+
+    return $site_ids;
+}
+
+function sync_property_visibility_sites($property_id, array $site_ids)
+{
+    $property_id = (int) $property_id;
+
+    if ($property_id <= 0) {
+        return;
+    }
+
+    table_delete_row('property_site_visibility', 'property_id = ' . $property_id);
+
+    $site_ids = array_values(array_unique(array_map('intval', $site_ids)));
+    foreach ($site_ids as $site_id) {
+        if ($site_id <= 0) {
+            continue;
+        }
+
+        table_insert(
+            'property_site_visibility',
+            array('property_id', 'site_id', 'is_visible'),
+            array(
+                'property_id' => $property_id,
+                'site_id' => $site_id,
+                'is_visible' => 1,
+            )
+        );
+    }
+}
+
+function is_property_visible_on_site($property_id, $site_id)
+{
+    $row = table_fetch_row(
+        'property_site_visibility',
+        'property_id = ' . (int) $property_id . ' AND site_id = ' . (int) $site_id . ' AND is_visible = 1'
+    );
+
+    return $row !== false;
+}
+
+function get_visible_property_ids_for_site($site_id)
+{
+    $rows = table_fetch_rows('property_site_visibility', 'site_id = ' . (int) $site_id . ' AND is_visible = 1', 'property_id ASC');
+    $property_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $property_ids[] = (int) $row['property_id'];
+        }
+    }
+
+    return $property_ids;
+}
+
+function build_visible_property_where($site_id, $column = 'id')
+{
+    $property_ids = get_visible_property_ids_for_site($site_id);
+
+    if (empty($property_ids)) {
+        return '1=0';
+    }
+
+    return sprintf('%s IN (%s)', $column, implode(', ', $property_ids));
+}
+
+function get_blog_visibility_site_ids($blog_id)
+{
+    $rows = table_fetch_rows('blog_site_visibility', 'blog_id = ' . (int) $blog_id . ' AND is_visible = 1', 'site_id ASC');
+    $site_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $site_ids[] = (int) $row['site_id'];
+        }
+    }
+
+    return $site_ids;
+}
+
+function sync_blog_visibility_sites($blog_id, array $site_ids)
+{
+    $blog_id = (int) $blog_id;
+
+    if ($blog_id <= 0) {
+        return;
+    }
+
+    table_delete_row('blog_site_visibility', 'blog_id = ' . $blog_id);
+
+    $site_ids = array_values(array_unique(array_map('intval', $site_ids)));
+    foreach ($site_ids as $site_id) {
+        if ($site_id <= 0) {
+            continue;
+        }
+
+        table_insert(
+            'blog_site_visibility',
+            array('blog_id', 'site_id', 'is_visible'),
+            array(
+                'blog_id' => $blog_id,
+                'site_id' => $site_id,
+                'is_visible' => 1,
+            )
+        );
+    }
+}
+
+function is_blog_visible_on_site($blog_id, $site_id)
+{
+    $row = table_fetch_row(
+        'blog_site_visibility',
+        'blog_id = ' . (int) $blog_id . ' AND site_id = ' . (int) $site_id . ' AND is_visible = 1'
+    );
+
+    return $row !== false;
+}
+
+function build_visible_blog_where($site_id, $column = 'id')
+{
+    $blog_ids = get_visible_blog_ids_for_site($site_id);
+
+    if (empty($blog_ids)) {
+        return '1=0';
+    }
+
+    return sprintf('%s IN (%s)', $column, implode(', ', $blog_ids));
+}
+
+function get_visible_blog_ids_for_site($site_id)
+{
+    $rows = table_fetch_rows('blog_site_visibility', 'site_id = ' . (int) $site_id . ' AND is_visible = 1', 'blog_id ASC');
+    $blog_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $blog_ids[] = (int) $row['blog_id'];
+        }
+    }
+
+    return $blog_ids;
+}
+
+function get_homepage_slider_visibility_site_ids($slider_id)
+{
+    $rows = table_fetch_rows('homepage_slider_site_visibility', 'homepage_slider_id = ' . (int) $slider_id . ' AND is_visible = 1', 'site_id ASC');
+    $site_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $site_ids[] = (int) $row['site_id'];
+        }
+    }
+
+    return $site_ids;
+}
+
+function sync_homepage_slider_visibility_sites($slider_id, array $site_ids)
+{
+    $slider_id = (int) $slider_id;
+
+    if ($slider_id <= 0) {
+        return;
+    }
+
+    table_delete_row('homepage_slider_site_visibility', 'homepage_slider_id = ' . $slider_id);
+
+    $site_ids = array_values(array_unique(array_map('intval', $site_ids)));
+    foreach ($site_ids as $site_id) {
+        if ($site_id <= 0) {
+            continue;
+        }
+
+        table_insert(
+            'homepage_slider_site_visibility',
+            array('homepage_slider_id', 'site_id', 'is_visible'),
+            array(
+                'homepage_slider_id' => $slider_id,
+                'site_id' => $site_id,
+                'is_visible' => 1,
+            )
+        );
+    }
+}
+
+function is_homepage_slider_visible_on_site($slider_id, $site_id)
+{
+    $row = table_fetch_row(
+        'homepage_slider_site_visibility',
+        'homepage_slider_id = ' . (int) $slider_id . ' AND site_id = ' . (int) $site_id . ' AND is_visible = 1'
+    );
+
+    return $row !== false;
+}
+
+function get_visible_homepage_slider_ids_for_site($site_id)
+{
+    $rows = table_fetch_rows('homepage_slider_site_visibility', 'site_id = ' . (int) $site_id . ' AND is_visible = 1', 'homepage_slider_id ASC');
+    $slider_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $slider_ids[] = (int) $row['homepage_slider_id'];
+        }
+    }
+
+    return $slider_ids;
+}
+
+function build_visible_homepage_slider_where($site_id, $column = 'id')
+{
+    $slider_ids = get_visible_homepage_slider_ids_for_site($site_id);
+
+    if (empty($slider_ids)) {
+        return '1=0';
+    }
+
+    return sprintf('%s IN (%s)', $column, implode(', ', $slider_ids));
+}
 ?>

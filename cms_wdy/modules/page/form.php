@@ -7,7 +7,7 @@
     
     $table_id = get_id();
     
-    if(isset($_POST['save']))
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $fields = array('parent_id','menu_title', 'page_title','h1_title', 'content','content_2','content_3','content_4','content_5','content_6', 'meta_keywords', 'meta_description', 'target', 'status','top_nav','footer_nav');
         
@@ -260,9 +260,7 @@
                                     $bannerCount++;
                             ?>
                                 <label>
-                                    <!--<?php/* if(!empty($photo['link'])): ?><a href="<?php echo $photo['link']; ?>"><?php endif; */?>-->
                                     <img src="<?php echo $photo['file']; ?>" style="width:100px;" />
-                                    <!-- <?php/* if(!empty($photo['link'])): ?></a><?php endif; */?> -->
                                     <input class="form-control" type="checkbox" name="delete-image[]" value="<?php echo $key; ?>" />
                                 </label>
                                     <input class="form-control" type="text" name="update_text[<?php echo $key ?>]" value="<?php echo $photo['link']; ?>" placeholder="Heading" />

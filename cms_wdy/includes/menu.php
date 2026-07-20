@@ -70,6 +70,35 @@ $menu = array (
       ),
     ),
   ),
+  array (
+    'module' => 'sites',
+    'title' => 'Sites',
+    'submenu' => 
+    array (
+      0 => 
+      array (
+        'action' => 'list',
+        'title' => 'Manage',
+      ),
+    ),
+  ),
+  array (
+    'module' => 'site_page_overrides',
+    'title' => 'Site Overrides',
+    'submenu' => 
+    array (
+      0 => 
+      array (
+        'action' => 'form',
+        'title' => 'Add',
+      ),
+      1 => 
+      array (
+        'action' => 'list',
+        'title' => 'Overview',
+      ),
+    ),
+  ),
   // array (
   //   'module' => 'team',
   //   'title' => 'Team',
@@ -207,23 +236,23 @@ $menu = array (
   //     ),
   //   ),
   // ),
-    array (
-    'module' => 'testimonials',
-    'title' => 'Testimonials',
-    'submenu' => 
-    array (
-      0 => 
-      array (
-        'action' => 'form',
-        'title' => 'Add',
-      ),
-      1 => 
-      array (
-        'action' => 'list',
-        'title' => 'Overview',
-      ),
-    ),
-  ),
+  //   array (
+  //   'module' => 'testimonials',
+  //   'title' => 'Testimonials',
+  //   'submenu' => 
+  //   array (
+  //     0 => 
+  //     array (
+  //       'action' => 'form',
+  //       'title' => 'Add',
+  //     ),
+  //     1 => 
+  //     array (
+  //       'action' => 'list',
+  //       'title' => 'Overview',
+  //     ),
+  //   ),
+  // ),
   // array (
   //   'module' => 'blocks',
   //   'title' => 'Blocks',
@@ -289,20 +318,6 @@ $menu = array (
       
   //   ),
   // ),
-    array (
-    'module' => 'settings',
-    'title' => 'Website Settings',
-    'submenu' => 
-    array (
-      0 => 
-      
-      array (
-        'action' => 'manage',
-        'title' => 'Manage',
-      ),
-      
-    ),
-  ),
   // array (
   //   'module' => 'web_forms',
   //   'title' => 'Web Forms',

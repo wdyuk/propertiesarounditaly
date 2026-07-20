@@ -15,7 +15,9 @@
 		$pageData['meta_title'].= " ".(int) $_GET['year'];
 		$pageData['meta_description'].= " in ".(int) $_GET['year'];
 	} ?>
-	<title><?php echo (isset($pageData['meta_title']) ? $pageData['meta_title'] : $pageData['title']); ?> | Properties around Italy</title>
+	<?php $site_title = isset($site_settings['website_name']) && strlen($site_settings['website_name']) ? $site_settings['website_name'] : SITE_NAME; ?>
+	<?php $site_base_url = isset($site_base_url) && strlen($site_base_url) ? rtrim($site_base_url, '/') . '/' : rtrim(BASE_URL, '/') . '/'; ?>
+	<title><?php echo (isset($pageData['meta_title']) ? $pageData['meta_title'] : $pageData['title']); ?> | <?= $site_title; ?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="description" content="<?= $pageData['meta_description']; ?>">
@@ -25,12 +27,12 @@
 	<meta property="og:image" content="<?= $pageData['meta_image']; ?>" />
 	<meta name="twitter:card" content="summary_large_image">
 	<?php } ?>
-	<meta property="og:url" content="<?= BASE_URL; ?><?= ltrim($rewriteData['url'],'/') ; ?>" />
+	<meta property="og:url" content="<?= $site_base_url; ?><?= ltrim($rewriteData['url'],'/') ; ?>" />
 	  <?php if ($rewriteData['url'] != '/about/latest-news' || isset($_GET['p']) && $_GET['p'] == 1) { ?>
-		 <link rel="canonical" href="<?= BASE_URL; ?><?= ltrim($rewriteData['url'],'/') ; ?>" />
+		 <link rel="canonical" href="<?= $site_base_url; ?><?= ltrim($rewriteData['url'],'/') ; ?>" />
 	  <?php } ?>
 	<meta name="format-detection" content="telephone=yes">
-	<meta name="author" content="Properties Around Italy">
+	<meta name="author" content="<?= $site_title; ?>">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<!-- <link rel="stylesheet" href="/dist/bootstrap.css?v1.15"> -->
 

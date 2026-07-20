@@ -7,8 +7,24 @@
     $messages = array();
     
     $table_id = get_id();
+    $sites = get_active_sites();
+    $selected_site_ids = array();
     
-    if(isset($_POST['save']))
+    if(isset($_POST['site_ids']) && is_array($_POST['site_ids'])) {
+        $selected_site_ids = array_map('intval', $_POST['site_ids']);
+    }
+    
+    if (!empty($table_id)) {
+        $selected_site_ids = get_homepage_slider_visibility_site_ids($table_id);
+    }
+    
+    if (empty($selected_site_ids) && !empty($sites)) {
+        foreach ($sites as $site) {
+            $selected_site_ids[] = (int) $site['id'];
+        }
+    }
+    
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $fields = array('heading_line_1','heading_line_2','content','link_url','button_text','status');
 
@@ -22,6 +38,18 @@
             table_update('homepage_slider', $fields, $_POST, 'id=' . get_id());
             $messages[] = 'Saved successfully.';
         }
+
+        $selected_site_ids = isset($_POST['site_ids']) && is_array($_POST['site_ids'])
+            ? array_map('intval', $_POST['site_ids'])
+            : array();
+
+        if (empty($selected_site_ids) && !empty($sites)) {
+            foreach ($sites as $site) {
+                $selected_site_ids[] = (int) $site['id'];
+            }
+        }
+
+        sync_homepage_slider_visibility_sites($table_id, $selected_site_ids);
 
         if( isset($_POST['delete']) ){
             foreach($_POST['delete'] as $image) {
@@ -68,9 +96,16 @@
         }
 
     }
-     
+    
     if(!empty($table_id)) {
         $data = table_fetch_row('homepage_slider', 'id=' . $table_id); 
+        $selected_site_ids = get_homepage_slider_visibility_site_ids($data['id']);
+    }
+
+    if (empty($selected_site_ids) && !empty($sites)) {
+        foreach ($sites as $site) {
+            $selected_site_ids[] = (int) $site['id'];
+        }
     }
     
 ?>
@@ -162,6 +197,21 @@
                     <option value="1" <?php echo (isset($data['status']) && $data['status'] == 1) ? 'selected="selected"' : ''; ?> >Enable</option>
                     <option value="0" <?php echo (isset($data['status']) && $data['status'] == 0) ? 'selected="selected"' : ''; ?> >Disable</option>
                 </select>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    Site Visibility
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <?php foreach ($sites as $site) { ?>
+                            <label class="d-block">
+                                <input type="checkbox" name="site_ids[]" value="<?php echo (int) $site['id']; ?>" <?php echo in_array((int) $site['id'], $selected_site_ids, true) ? 'checked="checked"' : ''; ?> />
+                                <?php echo htmlspecialchars($site['website_name']); ?>
+                            </label>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
             <?php show_big_button('save', 'Save'); ?>

@@ -5,7 +5,7 @@
             <h2 class="featured-properties py-4">Featured Properties</h2>
         </div>
     </div>
-    <?php $properties = table_fetch_rows('properties', 'featured=1', 'price ASC'); ?>
+    <?php $properties = table_fetch_rows('properties', 'featured=1 AND ' . build_visible_property_where($site['id']), 'price ASC'); ?>
     <div class="row gy-md-3">
         <?php foreach($properties as $property):
        

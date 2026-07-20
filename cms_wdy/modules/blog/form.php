@@ -6,9 +6,11 @@
     $messages = array();
     
     $table_id = get_id();
+    $sites = get_active_sites();
+    $selected_site_ids = array();
    
 
-    if(isset($_POST['save']))
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $fields = array('title','publish_date','teaser','content','meta_description','status');
 
@@ -28,6 +30,16 @@
             table_update('blog', $fields, $_POST, 'id=' . get_id());
             $messages[] = 'Saved successfully.';
         }   
+
+        if (isset($_POST['site_ids']) && is_array($_POST['site_ids'])) {
+            $selected_site_ids = array_map('intval', $_POST['site_ids']);
+        }
+
+        if (empty($selected_site_ids) && !empty($sites)) {
+            foreach ($sites as $site) {
+                $selected_site_ids[] = (int) $site['id'];
+            }
+        }
 
         if( isset($_POST['delete']) ){
             foreach($_POST['delete'] as $image) {
@@ -82,6 +94,7 @@
             $meta_image->toFile(UPLOADS_DIR . 'blog/' .$table_id . '-meta-image.' . $imgData['extension']);
 
         }
+        sync_blog_visibility_sites($table_id, $selected_site_ids);
         saveRewrite('blog',$table_id,'',$_POST['url']);
   
     }
@@ -91,6 +104,13 @@
         if($data !== false) {
         	$data['url'] = getRewriteUrl('blog', $data['id']);
     		$data['publish_date']= date('d/m/Y', strtotime($data['publish_date']));
+            $selected_site_ids = get_blog_visibility_site_ids($data['id']);
+        }
+    }
+
+    if (empty($selected_site_ids) && !empty($sites)) {
+        foreach ($sites as $site) {
+            $selected_site_ids[] = (int) $site['id'];
         }
     }
     
@@ -191,6 +211,33 @@
                     <option value="1" <?php echo (isset($data['status']) && $data['status'] == 1) ? 'selected="selected"' : ''; ?> >Enable</option>
                     <option value="0" <?php echo (isset($data['status']) && $data['status'] == 0) ? 'selected="selected"' : ''; ?> >Disable</option>
                 </select>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    Site Visibility
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Choose which websites should show this news story. Both sites are selected by default for new stories.</p>
+                    <?php if (!empty($sites)) { ?>
+                        <?php foreach ($sites as $site) { ?>
+                            <div class="form-check mb-2">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="site_ids[]"
+                                    id="site_<?= (int) $site['id']; ?>"
+                                    value="<?= (int) $site['id']; ?>"
+                                    <?= in_array((int) $site['id'], $selected_site_ids, true) ? 'checked="checked"' : ''; ?>
+                                />
+                                <label class="form-check-label" for="site_<?= (int) $site['id']; ?>">
+                                    <?= htmlentities($site['website_name']); ?> <span class="text-muted">(<?= htmlentities($site['domain']); ?>)</span>
+                                </label>
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <p class="text-muted mb-0">No active sites are available.</p>
+                    <?php } ?>
+                </div>
             </div>
             <div class="form-group">
             <?php show_big_button('save', 'Save'); ?>
