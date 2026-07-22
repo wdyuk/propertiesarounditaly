@@ -1,6 +1,8 @@
-<?php $parents = table_fetch_rows('page', 'status = 1 AND parent_id = -1 AND top_nav = 1', 'position ASC');
+<?php
+$page_visibility_where = isset($site['id']) ? build_visible_page_where((int) $site['id']) : '1=0';
+$parents = table_fetch_rows('page', 'status = 1 AND parent_id = -1 AND top_nav = 1 AND ' . $page_visibility_where, 'position ASC');
 foreach ($parents as $key => $parent) {
-	$child_parents = table_fetch_rows('page', 'status = 1 AND parent_id = '.$parent['id'].' AND top_nav = 1', 'position ASC');
+	$child_parents = table_fetch_rows('page', 'status = 1 AND parent_id = '.$parent['id'].' AND top_nav = 1 AND ' . $page_visibility_where, 'position ASC');
 
 	if(!empty($child_parents)){
 		$parent['childs'] = 1;
@@ -25,7 +27,8 @@ foreach ($parents as $key => $parent) {
 	}
 	$parents[$key] = $parent;
 }
-$sold_link = table_fetch_row('page','id = 97 AND status = 1');
+$sold_link = table_fetch_row('page','id = 97 AND status = 1 AND ' . $page_visibility_where);
+$show_faqs_link = isset($site['domain']) && strpos($site['domain'], 'propertiesforsaleinabruzzo') !== false;
 ?>
 
 <nav class="main-menu d-none d-md-block">
@@ -36,6 +39,11 @@ $sold_link = table_fetch_row('page','id = 97 AND status = 1');
 					<a class="main-menu__link" href="<?= getRewriteUrl('page',$parent['id']); ?>"><?= $parent['menu_title'];?></a>
 				</li>
 									
+		<?php } ?>
+		<?php if ($show_faqs_link) { ?>
+			<li class="main-menu__item">
+				<a class="main-menu__link" href="/faqs">FAQs</a>
+			</li>
 		<?php } ?>
 	</ul>
 </nav>
@@ -52,7 +60,7 @@ $sold_link = table_fetch_row('page','id = 97 AND status = 1');
 									<div class="col-md-10">
 										<?php foreach ($parent['categories'] as $cat) {
 											$heading = table_fetch_row('page_categories','id ='.$cat);
-											$child_parents = table_fetch_rows('page', 'status = 1 AND parent_id = '.$parent['id'].' AND top_nav = 1 AND page_category = '.$cat.'', 'position ASC');?>
+											$child_parents = table_fetch_rows('page', 'status = 1 AND parent_id = '.$parent['id'].' AND top_nav = 1 AND page_category = '.$cat.' AND ' . $page_visibility_where, 'position ASC');?>
 											<ul class="main-menu__child-list">
 												<li class="main-menu__child-item main-menu__menu-title"><?= $heading['name'];?></li>
 												<?php foreach ($child_parents as $child){
@@ -72,7 +80,7 @@ $sold_link = table_fetch_row('page','id = 97 AND status = 1');
 								else {?>
 									<div class="col-md-10 text-center">
 										<ul class="main-menu__child-list">
-											<?php $child_parents = table_fetch_rows('page', 'status = 1 AND parent_id = '.$parent['id'].' AND top_nav = 1', 'position ASC');
+											<?php $child_parents = table_fetch_rows('page', 'status = 1 AND parent_id = '.$parent['id'].' AND top_nav = 1 AND ' . $page_visibility_where, 'position ASC');
 											foreach ($child_parents as $child){ ?>
 												<li class="main-menu__child-item"><a class="main-menu__link" href="<?= getRewriteUrl('page',$child['id']);?>"><?= $child['menu_title']; ?></a></li>
 											<?php } ?>
@@ -84,6 +92,11 @@ $sold_link = table_fetch_row('page','id = 97 AND status = 1');
 					</li>
 				</ul>
 			</li>						
+		<?php } ?>
+		<?php if ($show_faqs_link) { ?>
+			<li class="main-menu__item">
+				<a class="main-menu__link" href="/faqs">FAQs</a>
+			</li>
 		<?php } ?>
 	</ul>
 </nav>

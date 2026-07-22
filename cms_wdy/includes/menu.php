@@ -202,23 +202,23 @@ $menu = array (
   //   ),
   // ),
 
-  // array (
-  //   'module' => 'faqs',
-  //   'title' => 'Faqs',
-  //   'submenu' => 
-  //   array (
-  //     0 => 
-  //     array (
-  //       'action' => 'form',
-  //       'title' => 'Add',
-  //     ),
-  //     1 => 
-  //     array (
-  //       'action' => 'list',
-  //       'title' => 'Overview',
-  //     ),
-  //   ),
-  // ),
+  array (
+    'module' => 'faqs',
+    'title' => 'Faqs',
+    'submenu' => 
+    array (
+      0 => 
+      array (
+        'action' => 'form',
+        'title' => 'Add',
+      ),
+      1 => 
+      array (
+        'action' => 'list',
+        'title' => 'Overview',
+      ),
+    ),
+  ),
   //   array (
   //   'module' => 'team',
   //   'title' => 'Team',

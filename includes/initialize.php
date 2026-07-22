@@ -110,8 +110,15 @@ elseif($rewriteData !== false && $rewriteData['table_name'] == 'page')  {
     	
     if($data !== false)
     {    
+        if (!is_page_visible_on_site((int) $data['id'], (int) $site['id'])) {
+            http_response_code(404);
+            header('Location: /404');
+            die();
+        }
+
 		$pageData = $data;
 		$pageData['title'] = $data['page_title'];
+        $pageData['meta_title'] = (isset($data['meta_title']) && strlen(trim((string) $data['meta_title'])) > 0) ? $data['meta_title'] : $data['page_title'];
 
         $override = load_site_page_override($site['id'], (int) $rewriteData['table_id']);
         if ($override !== false) {

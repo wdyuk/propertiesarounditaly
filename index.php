@@ -28,6 +28,9 @@
 		elseif ($rewriteData['table_name'] == 'blog'){
 			include('includes/layout/latest-news-single-article.php');
 		}		
+		elseif ($rewriteData['table_name'] == 'page' && in_array((int) $rewriteData['table_id'], array(35, 36, 37, 38, 39), true)) {
+			include('includes/layout/page-three-image-story.php');
+		}
 		elseif (file_exists('includes/layout' . $layoutfile)) {
 			include('includes/layout' . $layoutfile);
 		}

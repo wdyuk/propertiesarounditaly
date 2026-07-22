@@ -6,10 +6,26 @@
     $messages = array();
     
     $table_id = get_id();
+    $sites = get_active_sites();
+    $selected_site_ids = array();
+    
+    if(isset($_POST['site_ids']) && is_array($_POST['site_ids'])) {
+        $selected_site_ids = array_map('intval', $_POST['site_ids']);
+    }
+    
+    if (!empty($table_id)) {
+        $selected_site_ids = get_page_visibility_site_ids($table_id);
+    }
+    
+    if (empty($selected_site_ids) && !empty($sites)) {
+        foreach ($sites as $site) {
+            $selected_site_ids[] = (int) $site['id'];
+        }
+    }
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        $fields = array('parent_id','menu_title', 'page_title','h1_title', 'content','content_2','content_3','content_4','content_5','content_6', 'meta_keywords', 'meta_description', 'target', 'status','top_nav','footer_nav');
+        $fields = array('parent_id','menu_title', 'page_title','meta_title','h1_title', 'content','content_2','content_3','content_4','content_5','content_6', 'meta_keywords', 'meta_description', 'target', 'status','top_nav','footer_nav');
         
         if($_POST['id'] == 0) 
         {
@@ -22,6 +38,18 @@
             table_update('page', $fields, $_POST, 'id=' . get_id());
             $messages[] = 'Saved successfully.';
         }  
+
+        $selected_site_ids = isset($_POST['site_ids']) && is_array($_POST['site_ids'])
+            ? array_map('intval', $_POST['site_ids'])
+            : array();
+
+        if (empty($selected_site_ids) && !empty($sites)) {
+            foreach ($sites as $site) {
+                $selected_site_ids[] = (int) $site['id'];
+            }
+        }
+
+        sync_page_visibility_sites($table_id, $selected_site_ids);
         
         if( isset($_POST['delete']) ){
             foreach($_POST['delete'] as $image) {
@@ -186,6 +214,13 @@
         
         if($data !== false) {
             $data['url'] = getRewriteUrl(TBL_PAGE, $data['id']);
+            $selected_site_ids = get_page_visibility_site_ids($data['id']);
+        }
+    }
+    
+    if (empty($selected_site_ids) && !empty($sites)) {
+        foreach ($sites as $site) {
+            $selected_site_ids[] = (int) $site['id'];
         }
     }
     
@@ -231,6 +266,10 @@
         <div class="form-group">
             <label for="page_title">Page Title:</label>
             <input class="form-control" name="page_title" id="page_title" size="100" type="text" value="<?php echo isset($data['page_title']) ? $data['page_title'] : ''; ?>" />
+        </div>
+        <div class="form-group">
+            <label for="meta_title">Meta Title:</label>
+            <input class="form-control" name="meta_title" id="meta_title" size="100" type="text" value="<?php echo isset($data['meta_title']) ? $data['meta_title'] : ''; ?>" />
         </div>
         <div class="form-group">
             <label for="h1_title">H1 Title:</label>
@@ -335,6 +374,21 @@
                 </label>
             </div>
 
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                Site Visibility
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <?php foreach ($sites as $site) { ?>
+                        <label class="d-block">
+                            <input type="checkbox" name="site_ids[]" value="<?php echo (int) $site['id']; ?>" <?php echo in_array((int) $site['id'], $selected_site_ids, true) ? 'checked="checked"' : ''; ?> />
+                            <?php echo htmlspecialchars($site['website_name']); ?>
+                        </label>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
    
         <div class="form-group">

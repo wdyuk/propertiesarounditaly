@@ -571,4 +571,81 @@ function build_visible_homepage_slider_where($site_id, $column = 'id')
 
     return sprintf('%s IN (%s)', $column, implode(', ', $slider_ids));
 }
+
+function get_page_visibility_site_ids($page_id)
+{
+    $rows = table_fetch_rows('page_site_visibility', 'page_id = ' . (int) $page_id . ' AND is_visible = 1', 'site_id ASC');
+    $site_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $site_ids[] = (int) $row['site_id'];
+        }
+    }
+
+    return $site_ids;
+}
+
+function sync_page_visibility_sites($page_id, array $site_ids)
+{
+    $page_id = (int) $page_id;
+
+    if ($page_id <= 0) {
+        return;
+    }
+
+    table_delete_row('page_site_visibility', 'page_id = ' . $page_id);
+
+    $site_ids = array_values(array_unique(array_map('intval', $site_ids)));
+    foreach ($site_ids as $site_id) {
+        if ($site_id <= 0) {
+            continue;
+        }
+
+        table_insert(
+            'page_site_visibility',
+            array('page_id', 'site_id', 'is_visible'),
+            array(
+                'page_id' => $page_id,
+                'site_id' => $site_id,
+                'is_visible' => 1,
+            )
+        );
+    }
+}
+
+function is_page_visible_on_site($page_id, $site_id)
+{
+    $row = table_fetch_row(
+        'page_site_visibility',
+        'page_id = ' . (int) $page_id . ' AND site_id = ' . (int) $site_id . ' AND is_visible = 1'
+    );
+
+    return $row !== false;
+}
+
+function get_visible_page_ids_for_site($site_id)
+{
+    $rows = table_fetch_rows('page_site_visibility', 'site_id = ' . (int) $site_id . ' AND is_visible = 1', 'page_id ASC');
+    $page_ids = array();
+
+    if (!empty($rows)) {
+        foreach ($rows as $row) {
+            $page_ids[] = (int) $row['page_id'];
+        }
+    }
+
+    return $page_ids;
+}
+
+function build_visible_page_where($site_id, $column = 'id')
+{
+    $page_ids = get_visible_page_ids_for_site($site_id);
+
+    if (empty($page_ids)) {
+        return '1=0';
+    }
+
+    return sprintf('%s IN (%s)', $column, implode(', ', $page_ids));
+}
 ?>

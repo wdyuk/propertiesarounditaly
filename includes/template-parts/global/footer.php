@@ -11,6 +11,11 @@
 				</div>
 				<div class="col-md-4 col-12 pt-4 pt-md-0 ps-1 ps-sm-0">
 					<?php include('includes/template-parts/global/sm-links.php'); ?>
+					<?php if (isset($site['domain']) && strpos($site['domain'], 'propertiesforsaleinabruzzo') !== false) { ?>
+						<p class="mt-3 mb-0 footer__faq-link">
+							<a href="/faqs">FAQs</a>
+						</p>
+					<?php } ?>
 				</div>
 			</div>
 		</div>

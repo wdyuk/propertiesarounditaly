@@ -1,19 +1,22 @@
 <head>
 	<?php if (isset($_GET['p']) && $_GET['p'] > 1) {
-		if (strlen($pageData['meta_title'] == 0)) {
-			$pageData['meta_title'] == $pageData['title'];
+		if (!isset($pageData['meta_title']) || strlen(trim((string) $pageData['meta_title'])) === 0) {
+			$pageData['meta_title'] = $pageData['title'];
 		}
 		$pageData['title'].= " Page: ".(int) $_GET['p'];
 		$pageData['meta_title'].= " Page: ".(int) $_GET['p'];
 		$pageData['meta_description'].= " Page: ".(int) $_GET['p'];
 	} ?>
 	<?php if (isset($_GET['year']) && $_GET['year'] > 1) {
-		if (strlen($pageData['meta_title'] == 0)) {
-			$pageData['meta_title'] == $pageData['title'];
+		if (!isset($pageData['meta_title']) || strlen(trim((string) $pageData['meta_title'])) === 0) {
+			$pageData['meta_title'] = $pageData['title'];
 		}
 		$pageData['title'].= " ".(int) $_GET['year'];
 		$pageData['meta_title'].= " ".(int) $_GET['year'];
 		$pageData['meta_description'].= " in ".(int) $_GET['year'];
+	} ?>
+	<?php if (!isset($pageData['meta_title']) || strlen(trim((string) $pageData['meta_title'])) === 0) {
+		$pageData['meta_title'] = isset($pageData['title']) ? $pageData['title'] : SITE_NAME;
 	} ?>
 	<?php $site_title = isset($site_settings['website_name']) && strlen($site_settings['website_name']) ? $site_settings['website_name'] : SITE_NAME; ?>
 	<?php $site_base_url = isset($site_base_url) && strlen($site_base_url) ? rtrim($site_base_url, '/') . '/' : rtrim(BASE_URL, '/') . '/'; ?>
