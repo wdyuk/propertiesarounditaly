@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fields = array(
         'domain',
         'base_url',
+        'domain_aliases',
         'website_name',
         'company_number',
         'logo_path',
@@ -178,6 +179,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input class="required form-control" name="base_url_display" id="base_url" type="text" value="<?= isset($data['base_url']) ? htmlentities($data['base_url']) : ''; ?>" disabled="disabled" />
                 <input type="hidden" name="base_url" value="<?= isset($data['base_url']) ? htmlentities($data['base_url']) : ''; ?>" />
                 <small class="form-text text-muted">This is locked because it is used for canonical and Open Graph URLs.</small>
+            </div>
+            <div class="form-group">
+                <label for="domain_aliases">Domain Aliases</label>
+                <textarea class="form-control" name="domain_aliases" id="domain_aliases" rows="3"><?= isset($data['domain_aliases']) ? htmlentities($data['domain_aliases']) : ''; ?></textarea>
+                <small class="form-text text-muted">Add any extra domains for this site, one per line or separated by commas. Example: <code>propertiesarounditaly.co.uk</code></small>
             </div>
             <div class="form-group">
                 <label for="website_name">Website Name</label>

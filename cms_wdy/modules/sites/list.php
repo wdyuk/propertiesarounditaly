@@ -11,6 +11,7 @@ $rows = table_fetch_rows('sites', '', 'is_default DESC, website_name ASC');
                 <tr>
                     <th>Site</th>
                     <th>Domain</th>
+                    <th>Aliases</th>
                     <th>Base URL</th>
                     <th>Default</th>
                     <th>Status</th>
@@ -22,6 +23,7 @@ $rows = table_fetch_rows('sites', '', 'is_default DESC, website_name ASC');
                     <tr>
                         <td><?= htmlentities($row['website_name']); ?></td>
                         <td><?= htmlentities($row['domain']); ?></td>
+                        <td><?= isset($row['domain_aliases']) ? nl2br(htmlentities($row['domain_aliases'])) : ''; ?></td>
                         <td><?= htmlentities($row['base_url']); ?></td>
                         <td><?= ((int) $row['is_default'] === 1) ? 'Yes' : 'No'; ?></td>
                         <td><?= ((int) $row['status'] === 1) ? 'Enabled' : 'Disabled'; ?></td>

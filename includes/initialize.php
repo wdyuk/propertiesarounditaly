@@ -229,9 +229,94 @@ function get_current_host(): string
     return preg_replace('/^www\./', '', $host);
 }
 
-function load_site_profile(string $host): array
+function normalize_site_domain_value(string $domain): string
+{
+    $domain = strtolower(trim($domain));
+
+    if (strlen($domain) === 0) {
+        return '';
+    }
+
+    $domain = preg_replace('#^https?://#i', '', $domain);
+    $domain = preg_replace('#/.*$#', '', $domain);
+
+    if (strpos($domain, ':') !== false) {
+        $domain = explode(':', $domain, 2)[0];
+    }
+
+    return preg_replace('/^www\./', '', $domain);
+}
+
+function get_site_domain_aliases($site): array
+{
+    $aliases = array();
+
+    if (!isset($site['domain_aliases'])) {
+        return $aliases;
+    }
+
+    $raw_aliases = trim((string) $site['domain_aliases']);
+    if ($raw_aliases === '') {
+        return $aliases;
+    }
+
+    $parts = preg_split('/[\r\n,]+/', $raw_aliases);
+    if ($parts === false) {
+        return $aliases;
+    }
+
+    foreach ($parts as $part) {
+        $alias = normalize_site_domain_value($part);
+        if ($alias !== '') {
+            $aliases[] = $alias;
+        }
+    }
+
+    return array_values(array_unique($aliases));
+}
+
+function site_matches_host($site, string $host): bool
+{
+    $host = normalize_site_domain_value($host);
+
+    if ($host === '') {
+        return false;
+    }
+
+    if (isset($site['domain']) && normalize_site_domain_value((string) $site['domain']) === $host) {
+        return true;
+    }
+
+    foreach (get_site_domain_aliases($site) as $alias) {
+        if ($alias === $host) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function resolve_site_profile_by_host(string $host)
 {
     $site = table_fetch_row('sites', 'status = 1 AND domain = "' . $host . '"');
+
+    if ($site !== false) {
+        return $site;
+    }
+
+    $sites = get_active_sites();
+    foreach ($sites as $candidate) {
+        if (site_matches_host($candidate, $host)) {
+            return $candidate;
+        }
+    }
+
+    return false;
+}
+
+function load_site_profile(string $host): array
+{
+    $site = resolve_site_profile_by_host($host);
 
     if ($site === false) {
         $site = table_fetch_row('sites', 'status = 1 AND is_default = 1');
