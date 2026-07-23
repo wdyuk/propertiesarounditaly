@@ -20,10 +20,11 @@
     <div class="card-body">
         <div class="form-row align-items-center">
         	<table class="list">
-        		<thead>
+				<thead>
 					<tr>
 						<th>&nbsp;</th>
 						<th>Question</th>
+						<th>Category</th>
 						<th>Answer</th>
 					</tr>
 				</thead>
@@ -31,12 +32,12 @@
 				<tbody class="cursor-move">
 				<?php 
 					$operations = array('form', 'delete');
-					show_rows($rows, 'faqs', array('question','answer'), $operations);
+					show_rows($rows, 'faqs', array('question','category','answer'), $operations);
 				?>
 				</tbody>
 				<tfoot>
 				<tr>
-					<td colspan="3"><?php show_pagination($total_pages, $page); ?></td>
+					<td colspan="4"><?php show_pagination($total_pages, $page); ?></td>
 				</tr>
 				</tfoot>
 			</table>

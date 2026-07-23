@@ -4,7 +4,7 @@
 			<div class="row align-items-start align-items-center">
 				<div class="col-8 col-md-12 col-lg-5">
                     <div class="header__logo-container text-start text-md-center text-lg-start px-2">
-						<a href="/"><img src="<?= $logo; ?>" alt="<?= $settings['website_name']; ?>" title class="img-fluid"></a>
+						<a href="/"><img src="<?= $site_logo; ?>" alt="<?= $settings['website_name']; ?>" title class="img-fluid"></a>
 					</div>
 				</div>
 				<div class="col-4 d-md-none">

@@ -7,10 +7,11 @@
         $page = intval($_GET['page']);
     }
     
-    $total_rows = table_row_count('properties','type="Sale" AND status="1"');
+    $visibility_where = build_visible_property_where($site['id']);
+    $total_rows = table_row_count('properties','type="Sale" AND status="1" AND ' . $visibility_where);
     $total_pages = ceil($total_rows / $limit);
     
-    $properties = table_fetch_rows('properties', 'type="Sale" and status="1"', 'price ASC', ($page-1) * $limit, $limit);
+    $properties = table_fetch_rows('properties', 'type="Sale" and status="1" AND ' . $visibility_where, 'price ASC', ($page-1) * $limit, $limit);
 ?>
 
 <div class="container mb-5">

@@ -7,10 +7,18 @@
     $messages = array();
     
     $table_id = get_id();
+    $categories = array(
+        'Buying Property in Italy',
+        'Viewing Properties',
+        'Living in Abruzzo',
+        'Renovation & Property Management',
+        'Travel & Lifestyle',
+        'Our Services',
+    );
     
     if(isset($_POST['save']))
     {
-        $fields = array('question','answer','status');
+        $fields = array('question','category','answer','status');
 
         if($_POST['id'] == 0) 
         {
@@ -53,6 +61,17 @@
             <div class="form-group">
                 <label for="title">Question:</label>
                 <input class="required form-control" name="question" id="question" size="50" type="text" value="<?php echo isset($data['question']) ? $data['question'] : ''; ?>" />
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select name="category" id="category" class="form-control">
+                    <option value="">-- Select category --</option>
+                    <?php foreach ($categories as $category) { ?>
+                        <option value="<?php echo htmlentities($category); ?>" <?php echo (isset($data['category']) && $data['category'] === $category) ? 'selected="selected"' : ''; ?>>
+                            <?php echo htmlentities($category); ?>
+                        </option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="title">Answer:</label>

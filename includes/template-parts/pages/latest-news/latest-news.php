@@ -1,6 +1,7 @@
 <?php 
-$latest_news = table_fetch_row('blog','status=1','publish_date DESC');
-$current_year = date('Y',strtotime($latest_news['publish_date']));
+$blog_visibility_where = build_visible_blog_where($site['id']);
+$latest_news = table_fetch_row('blog','status=1 AND ' . $blog_visibility_where,'publish_date DESC');
+$current_year = $latest_news !== false ? date('Y',strtotime($latest_news['publish_date'])) : date('Y');
 
 $today = date('Y-m-d H:i:s');
 $p = isset($_GET['p']) && is_numeric($_GET['p']) ? intval($_GET['p']) : 1;
@@ -12,13 +13,13 @@ if (isset($_GET['year'])) {
 	$current_year = (int) $_GET['year'];
 	$query = 'year='.$current_year.'&';
 }
-$stories = table_fetch_rows('blog','publish_date >= "'.$current_year.'-01-01" AND publish_date <= "'.$current_year.'-12-31" and status = 1','publish_date DESC', $start, $limit);
+$stories = table_fetch_rows('blog','publish_date >= "'.$current_year.'-01-01" AND publish_date <= "'.$current_year.'-12-31" and status = 1 AND ' . $blog_visibility_where,'publish_date DESC', $start, $limit);
 
-$total_rows = table_row_count('blog', 'publish_date >= "'.$current_year.'-01-01" AND publish_date <= "'.$current_year.'-12-31" and status = 1');
+$total_rows = table_row_count('blog', 'publish_date >= "'.$current_year.'-01-01" AND publish_date <= "'.$current_year.'-12-31" and status = 1 AND ' . $blog_visibility_where);
 $total_pages = ceil($total_rows / $limit);
 //$stories = table_fetch_rows('blog', 'publish_date <="'. $today .'" AND status=1', 'publish_date DESC', $start, $limit);
 //Create dropdown
-	$all_news = table_fetch_rows('blog','status=1','id ASC');
+	$all_news = table_fetch_rows('blog','status=1 AND ' . $blog_visibility_where,'id ASC');
 
 	$news_years = [];
 	foreach($all_news as $all_news) {

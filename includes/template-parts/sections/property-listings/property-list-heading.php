@@ -26,6 +26,8 @@ unset ($queryparams['url']);
 $p = isset($_GET['p']) && is_numeric($_GET['p']) ? intval($_GET['p']) : 1;
 $start = ($p - 1) * $limit;
 //$conditions[] = 'status = 1';
+$conditions = array();
+$conditions[] = build_visible_property_where(isset($site['id']) ? $site['id'] : 0);
 
 if(isset($_GET['orderby'])){
 	$_SESSION['order_clause'] = $_GET['orderby'];

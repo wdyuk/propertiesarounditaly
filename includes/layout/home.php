@@ -1,5 +1,9 @@
 <main>
-	<?php $slides = table_fetch_rows('homepage_slider','status = 1','position ASC');?>
+	<?php
+        $slider_site_id = isset($site['id']) ? (int) $site['id'] : 0;
+        $slider_visibility_where = $slider_site_id > 0 ? build_visible_homepage_slider_where($slider_site_id) : '1=0';
+        $slides = table_fetch_rows('homepage_slider', 'status = 1 AND ' . $slider_visibility_where, 'position ASC');
+    ?>
 	<div class="banner">
 	  <div class="img-slider main-slider">
 	    <?php foreach ($slides as $slide) {
